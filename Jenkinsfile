@@ -5,7 +5,7 @@ pipeline {
         stage('first_query') {
             steps {
                 
-                uname -a
+                sh 'uname -a'
           
             }
         }
