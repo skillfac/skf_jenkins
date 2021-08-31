@@ -5,7 +5,7 @@ pipeline {
         stage('first_query') {
             steps {
          
-                sh '/usr/bin/mysql --user rfamro --host mysql-rfam-public.ebi.ac.uk --port 4497 --database Rfam'
+                sudo sh 'mysql --user rfamro --host mysql-rfam-public.ebi.ac.uk --port 4497 --database Rfam'
           
             }
         }
