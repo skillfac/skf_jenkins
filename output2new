@@ -1,0 +1,79 @@
+Started by GitHub push by skillfac
+Obtained Jenkinsfile from git git@github.com:skillfac/jenkins_project.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/proj
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-ssh
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/proj/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:skillfac/jenkins_project.git # timeout=10
+Fetching upstream changes from git@github.com:skillfac/jenkins_project.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials github-ssh
+ > git fetch --tags --progress -- git@github.com:skillfac/jenkins_project.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision f372e333035cc0cb0b40b223ccabf189ccabf9f5 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f f372e333035cc0cb0b40b223ccabf189ccabf9f5 # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk 0269b16acba24c1458bee3977517401ec9fcede4 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (first_query)
+[Pipeline] sh
++ cp /var/lib/jenkins/workspace/proj/index.html /home/ubuntu/www/html/index.html
++ docker run -d --name nginx -v /home/ubuntu/www/html:/usr/share/nginx/html -p9889:80 nginx:latest
+5efd14298d5e3c641aa07ef25bb23d89dc388c07cb5d2b51758fd94e2926d185
++ echo Testing the application in nginx container
+Testing the application in nginx container
++ docker exec -u 0 nginx curl -LI http://127.0.0.1:80 -o /dev/null -w %{http_code}
+ -s
+200
++ echo Testing the application on the host system...
+Testing the application on the host system...
++ curl -LI http://127.0.0.1:9889 -o /dev/null -w %{http_code}
+ -s
++ result=200
++ echo 200
+200
++ [ 200 = 200 ]
++ echo Test passed
+Test passed
++ echo Checking integrity of files in container and on the host machine
+Checking integrity of files in container and on the host machine
++ sudo curl -s http://127.0.0.1:9889/index.html
++ md5sum
++ awk {print $1}
+sudo: no tty present and no askpass program specified
++ result1=d41d8cd98f00b204e9800998ecf8427e
++ /var/lib/jenkins/workspace/proj/index.html
+/var/lib/jenkins/workspace/proj@tmp/durable-78422206/script.sh: 32: /var/lib/jenkins/workspace/proj@tmp/durable-78422206/script.sh: /var/lib/jenkins/workspace/proj/index.html: Permission denied
++ + awk {print$1}
+md5sum
++ result2=d41d8cd98f00b204e9800998ecf8427e
++ echo d41d8cd98f00b204e9800998ecf8427e
+d41d8cd98f00b204e9800998ecf8427e
++ echo d41d8cd98f00b204e9800998ecf8427e
+d41d8cd98f00b204e9800998ecf8427e
++ [ d41d8cd98f00b204e9800998ecf8427e = d41d8cd98f00b204e9800998ecf8427e ]
++ echo Test passed
+Test passed
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
