@@ -1,0 +1,48 @@
+Started by GitHub push by skillfac
+Obtained Jenkinsfile from git git@github.com:skillfac/jenkins_project.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/proj
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential github-ssh
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/proj/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url git@github.com:skillfac/jenkins_project.git # timeout=10
+Fetching upstream changes from git@github.com:skillfac/jenkins_project.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.17.1'
+using GIT_SSH to set credentials github-ssh
+ > git fetch --tags --progress -- git@github.com:skillfac/jenkins_project.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+Checking out Revision ccdf8b025733d1005b09cee97db3fdab1da2c423 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f ccdf8b025733d1005b09cee97db3fdab1da2c423 # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git rev-list --no-walk cf238a1b353a210f6613e710e1e1cb10a978abf3 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (first_query)
+[Pipeline] sh
++ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
++ cp /var/lib/jenkins/workspace/proj/index.html /home/ubuntu/www/html/index.html
++ docker run -dit --name nginx -v /home/ubuntu/www/html:/usr/share/nginx/html -p9889:80 nginx:latest
+d3ad4a6633c955f6abf9062f757f5ae4a834b4eac5598ef9f947c01d6e698fea
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
+
